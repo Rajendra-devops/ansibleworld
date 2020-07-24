@@ -1,0 +1,12 @@
+--- 
+hosts: all
+name: "verify installed packages"
+tasks: 
+  - 
+    name: "ensure a list of packages installed"
+    yum: 
+      name: "{{ packages }}"
+      vars: 
+        packages: 
+          - httpd
+          - httpd-tools
