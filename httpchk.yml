@@ -4,7 +4,7 @@
    tasks: 
    - name: "ensure a list of packages installed"
      yum: 
-     name: "{{ packages }}"
+       name: "{{ packages }}"
        vars: 
          packages: 
          - httpd
