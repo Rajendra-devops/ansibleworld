@@ -10,3 +10,5 @@ tasks:
         packages: 
           - httpd
           - httpd-tools
+          - tree
+          - sshd
