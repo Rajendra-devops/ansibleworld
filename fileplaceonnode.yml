@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks: 
+  -  name: create a blank file
+     file: 
+       path: /home/ansible/test.txt
+       state: touch
