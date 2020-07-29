@@ -1,0 +1,9 @@
+---
+- name: Verify the OS archectiure
+  hosts: node
+  gather_facts: True
+  tasks:
+    - name: Get server arch
+      debug:
+        var: ansible_facts.architecture
+
