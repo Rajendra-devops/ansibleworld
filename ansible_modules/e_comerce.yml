@@ -1,0 +1,26 @@
+---
+- hosts: node
+  become: yes
+  tasks:
+    -  name: install mariadb server package
+       yum: 
+         name:
+           - mariadb-server
+           - mysql-pthyon
+         state: installed
+    -  name: create mysql configuration file
+       copy: src=file/my.cnf des=/etc/my.cnf
+    -  name: start mariadb service
+       service: name=mariadb state=started enabled=yes
+    -  name: start the firewallld
+       service: name=firewalld state=started enabled=yes
+    -  name:  create firewall rule
+       firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+    -  name: create application database
+       mysql_db: name={{ dbname }} state=present
+    -  name: create application db user
+       myql_user: name={{ dbuser }} password={{ dbpassword }} priv=*.*:All host='localhost' state=present
+    -  name: move the databse script to db host='localhost'
+       copy: src=file/db-load_script.sql dest=/tmp/db-load_script.sql
+    -  name: load the inventory data
+       shell: myqsl -f < /tmp/db-load_script.sql
